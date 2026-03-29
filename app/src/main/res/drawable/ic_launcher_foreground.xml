@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Foreground for adaptive icon (108dp canvas, safe zone is center 72dp = inset 18dp each side).
+  Depicts a simple checklist: three rows, the bottom row has a checkmark prefix.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Row 1: plain line -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M36,38 L72,38" />
+
+    <!-- Row 2: plain line -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M36,54 L72,54" />
+
+    <!-- Row 3: checkmark + shorter line -->
+    <!-- checkmark tick -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M30,70 L34,75 L42,65" />
+    <!-- line after checkmark -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M48,70 L72,70" />
+
+</vector>
