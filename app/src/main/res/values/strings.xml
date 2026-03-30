@@ -5,4 +5,9 @@
     <string name="button_add">Add</string>
     <string name="button_clear">Clear</string>
     <string name="label_done">Done</string>
+    <string name="menu_export">Export</string>
+    <string name="menu_import">Import</string>
+    <string name="export_copied">List copied to clipboard</string>
+    <string name="import_hint">Paste items separated by newlines, commas, or tabs…</string>
+    <string name="button_cancel">Cancel</string>
 </resources>

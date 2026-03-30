@@ -45,6 +45,16 @@ class ListViewModel(private val dao: ListItemDao) : ViewModel() {
     fun clearAll() {
         viewModelScope.launch { dao.deleteAll() }
     }
+
+    fun importItems(text: String) {
+        val items = text.split("\n", "\t", ",")
+            .map { it.trim() }
+            .filter { it.isNotBlank() }
+        if (items.isEmpty()) return
+        viewModelScope.launch {
+            items.forEach { dao.insert(ListItemEntity(text = it)) }
+        }
+    }
 }
 
 class ListViewModelFactory(private val dao: ListItemDao) : ViewModelProvider.Factory {
