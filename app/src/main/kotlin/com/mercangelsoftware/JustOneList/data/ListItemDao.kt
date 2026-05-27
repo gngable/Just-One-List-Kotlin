@@ -16,6 +16,9 @@ interface ListItemDao {
     @Query("UPDATE list_items SET checked = :checked WHERE id = :id")
     suspend fun setChecked(id: Long, checked: Boolean)
 
+    @Query("UPDATE list_items SET position = :position WHERE id = :id")
+    suspend fun updatePosition(id: Long, position: Long)
+
     @Query("DELETE FROM list_items")
     suspend fun deleteAll()
 }

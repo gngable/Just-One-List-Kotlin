@@ -46,6 +46,14 @@ class ListViewModel(private val dao: ListItemDao) : ViewModel() {
         viewModelScope.launch { dao.deleteAll() }
     }
 
+    fun reorderItems(orderedIds: List<Long>) {
+        viewModelScope.launch {
+            orderedIds.forEachIndexed { index, id ->
+                dao.updatePosition(id, index.toLong())
+            }
+        }
+    }
+
     fun importItems(text: String) {
         val items = text.split("\n", "\t", ",")
             .map { it.trim() }

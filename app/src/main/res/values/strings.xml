@@ -10,4 +10,8 @@
     <string name="export_copied">List copied to clipboard</string>
     <string name="import_hint">Paste items separated by newlines, commas, or tabs…</string>
     <string name="button_cancel">Cancel</string>
+    <string name="clear_confirm_title">Clear list?</string>
+    <string name="clear_confirm_message">This will remove all items from the list.</string>
+    <string name="button_clear_confirm">Clear</string>
+    <string name="drag_to_reorder">Drag to reorder</string>
 </resources>
