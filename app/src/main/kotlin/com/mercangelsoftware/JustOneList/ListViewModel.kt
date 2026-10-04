@@ -3,9 +3,9 @@ package com.mercangelsoftware.JustOneList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.mercangelsoftware.JustOneList.data.ListDatabase
 import com.mercangelsoftware.JustOneList.data.ListItemDao
 import com.mercangelsoftware.JustOneList.data.ListItemEntity
+import com.mercangelsoftware.JustOneList.data.Settings
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
@@ -17,7 +17,12 @@ data class ListUiState(
     val checkedItems: List<ListItemEntity> = emptyList()
 )
 
-class ListViewModel(private val dao: ListItemDao) : ViewModel() {
+class ListViewModel(
+    private val dao: ListItemDao,
+    private val settings: Settings
+) : ViewModel() {
+
+    val keepScreenOn: StateFlow<Boolean> = settings.keepScreenOn
 
     val uiState: StateFlow<ListUiState> = dao.observeAll()
         .map { entities ->
@@ -42,9 +47,24 @@ class ListViewModel(private val dao: ListItemDao) : ViewModel() {
         viewModelScope.launch { dao.setChecked(id, !currentlyChecked) }
     }
 
-    fun clearAll() {
-        viewModelScope.launch { dao.deleteAll() }
+    fun editItem(id: Long, text: String) {
+        val trimmed = text.trim()
+        if (trimmed.isBlank()) return
+        viewModelScope.launch { dao.setText(id, trimmed) }
     }
+
+    /** Deletes [items]; pass the same list to [restoreItems] to undo. */
+    fun deleteItems(items: List<ListItemEntity>) {
+        if (items.isEmpty()) return
+        viewModelScope.launch { dao.delete(items) }
+    }
+
+    fun restoreItems(items: List<ListItemEntity>) {
+        if (items.isEmpty()) return
+        viewModelScope.launch { dao.insertAll(items) }
+    }
+
+    fun setKeepScreenOn(enabled: Boolean) = settings.setKeepScreenOn(enabled)
 
     fun reorderItems(orderedIds: List<Long>) {
         viewModelScope.launch {
@@ -65,7 +85,10 @@ class ListViewModel(private val dao: ListItemDao) : ViewModel() {
     }
 }
 
-class ListViewModelFactory(private val dao: ListItemDao) : ViewModelProvider.Factory {
+class ListViewModelFactory(
+    private val dao: ListItemDao,
+    private val settings: Settings
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T = ListViewModel(dao) as T
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = ListViewModel(dao, settings) as T
 }

@@ -3,7 +3,17 @@
     <string name="app_name">Just One List</string>
     <string name="hint_add_item">Add an item…</string>
     <string name="button_add">Add</string>
-    <string name="button_clear">Clear</string>
+    <string name="button_clear_done">Clear done</string>
+    <string name="button_undo">Undo</string>
+    <string name="menu_clear_all">Clear all</string>
+    <string name="menu_keep_screen_on">Keep screen on</string>
+    <string name="more_options">More options</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <plurals name="items_deleted">
+        <item quantity="one">Item deleted</item>
+        <item quantity="other">%d items deleted</item>
+    </plurals>
     <string name="label_done">Done</string>
     <string name="menu_export">Export</string>
     <string name="menu_import">Import</string>
